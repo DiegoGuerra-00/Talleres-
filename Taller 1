@@ -1,13 +1,11 @@
-Diego Guerra || 
-Joaquín Berenguela ||
-package Taller;
+package webada;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Taller_POO 
-{
+public class clasesita {
+
 	public static void main(String[] args) throws IOException
 	{
 		while (true) 
@@ -100,12 +98,17 @@ public class Taller_POO
 				}
 			}else if(usuario_admin.equals("A")) //Si se ingresa "A" se accede al menú de administrador.
 			{	System.out.println("------------------");
+				System.out.println("MENÚ ADMIN:");
 				System.out.println("1. Ver la matriz completa de métricas\n"
 						+ "2. Identificar el experimento con mejor F1-Score\n"
 						+ "3. Calcular el promedio global de cada métrica\n"
 						+ "4. Comparar dos experimentos lado a lado");
 				System.out.print("Seleccione una opción (1,2,3 o 4): ");
-				
+				int opcion_elegida = Integer.parseInt(verificar.nextLine());//El usuario elige una opción (un entero)
+				if (opcion_elegida == 1) 
+				{
+					matrizCompletaMetricas(opcion_elegida);
+				}
 			}
 			
 			else if(usuario_admin.equals("S")) 
@@ -232,6 +235,62 @@ public class Taller_POO
 			}return	(double)(tp_1+ tn_1) / (tp_1+ fp_1 + tn_1+fn_1);
 	
 	}
+	public static void matrizCompletaMetricas(int opcion) throws FileNotFoundException 
+	{
+		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
+		int[] confusion = new int[4];
+		File line2 = new File("predicciones.txt");          
+		Scanner fila2 = new Scanner(line2); // se abre el archivo de predicciones 
+		int k = 0;
+		
+		if (opcion == 1) 
+		{
+			while(fila2.hasNextLine()) // se recorre el archivo de predicciones 
+			{
+//				double tp_1 = 0; //contadores 
+//				double fp_1 = 0;
+//				double tn_1 = 0;
+//				double fn_1 = 0;
+				String linea= fila2.nextLine();
+				String[] partes = linea.split(";");
+				
+				String experimento = partes[0];
+				int real = Integer.valueOf(partes[1]);
+				int predicho = Integer.valueOf(partes[2]);
+				
+				for (int i =0; i<confusion. -1; i++) 
+				{
+					System.out.println(experimento + " " + real+ " " + predicho);
+					double tp_1 = 0; //contadores 
+					double fp_1 = 0;
+					double tn_1 = 0;
+					double fn_1 = 0;
+					if(experimento.equalsIgnoreCase(experimentos[i])) 
+					{
+						if (real == 1 && predicho ==1) {
+							tp_1++;
+						}else if (real == 0 && predicho == 1) {
+							fp_1++;
+						}else if (real == 0 && predicho == 0) {
+							tn_1++;
+						}else if (real == 1 && predicho == 0) {
+							fn_1++;
+						}System.out.println("salta");
+					}
 
+
+				} 
+//				double Accuracy  = (tp_1+ tn_1) / (tp_1+ fp_1 + tn_1 + fn_1);// se siguen las formulas del taller 
+//				double Precision  = tp_1 / (tp_1 + fp_1);
+//				double Recall  = tp_1 / (tp_1 + fn_1);
+//				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
+				//System.out.println(experimento);
+			}
+
+		}
+			
+		}
+		
+		
 	
 }
