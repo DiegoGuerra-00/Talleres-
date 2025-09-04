@@ -1,6 +1,5 @@
 Diego Guerra || 
 Joaquín Berenguela ||
-
 package Taller;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +20,7 @@ public class Taller_POO
 			
 			if (usuario_admin.equals("U"))// Si se ingresa "U", se accede al menú de usuario y se muestran las opciones
 			{
+				
 				
 				System.out.println("------------------");
 				System.out.println("MENÚ USUARIO:");
@@ -48,7 +48,8 @@ public class Taller_POO
 						String descripcion= partes[1];
 						
 						System.out.println(identificador+" " + descripcion);	// se muestran por pantalla los experimentos
-					}System.out.println("------------------");
+					}fila.close();
+					System.out.println("------------------");
 
 				}else if(opcion_elegida == 2) 
 				{ // opción 2, se muestra un exp en especifico 
@@ -97,12 +98,18 @@ public class Taller_POO
 				} else if (opcion_elegida == 4) {
 					mostrar_accurancy(opcion_elegida);
 				}
-			}else if(usuario_admin.equals("S")) 
+			}else if(usuario_admin.equals("A")) 
+			{
+				
+			}
+			
+			else if(usuario_admin.equals("S")) 
 			{
 				break;// el usuario al elegir "S" se sale del progama. 
 			}
-			
-		}System.out.println(" ");
+		 
+		}
+		System.out.println(" ");
 		System.out.println("Saliendo....");
 
 		
@@ -156,9 +163,8 @@ public class Taller_POO
 			return new int[] {tp_1,fp_1,tn_1,fn_1};// se guardan los contadores en una lista para luego ser usados
 		}
 	
-		return null;			
-
-	}
+		return null;
+		}
 	public static void mostrar_accurancy(int opcion) throws FileNotFoundException 
 	{ // la funcion de este metodo es almancerar todos los "accuracy" de cada experimento
 		
