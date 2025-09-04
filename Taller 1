@@ -36,7 +36,7 @@ public class Taller_POO
 				{ //Opcion 1, se muestran los experimentos 
 					System.out.println("------------------");
 					System.out.println("Lista experimentos:");
-					File line = new File("C:\\Users\\casa\\Downloads\\experimentos.txt"); // se abre el archivo
+					File line = new File("experimentos.txt"); // se abre el archivo
 					Scanner fila = new Scanner(line);								// con los experimentos
 						
 					while(fila.hasNextLine()) // se recorre el archivo 
@@ -89,7 +89,7 @@ public class Taller_POO
 					double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
 					
 					System.out.println(" ");
-					System.out.println("MÉTRICAS DE EXPERIMENTO "+nuevo_exp);
+					System.out.println("MÉTRICAS DE EXPERIMENTO "+nuevo_exp); // se muestra en pantalla 
 					System.out.println(" ");
 					System.out.println("Accuracy: "+Accuracy+"\n" +"Precision: "+Precision+"\n"+"Recall: "+Recall+"\n"+"F1: "+f1_score);
 					System.out.println(" ");
@@ -98,8 +98,13 @@ public class Taller_POO
 				} else if (opcion_elegida == 4) {
 					mostrar_accurancy(opcion_elegida);
 				}
-			}else if(usuario_admin.equals("A")) 
-			{
+			}else if(usuario_admin.equals("A")) //Si se ingresa "A" se accede al menú de administrador.
+			{	System.out.println("------------------");
+				System.out.println("1. Ver la matriz completa de métricas\n"
+						+ "2. Identificar el experimento con mejor F1-Score\n"
+						+ "3. Calcular el promedio global de cada métrica\n"
+						+ "4. Comparar dos experimentos lado a lado");
+				System.out.print("Seleccione una opción (1,2,3 o 4): ");
 				
 			}
 			
@@ -118,7 +123,7 @@ public class Taller_POO
 	}
 	public static int[] matriz_confusion(String numero_exp, int opcion) throws FileNotFoundException // Se crea un metodo que reciba como parametro
 	{																					// un experimento que el usuario ingrese
-		File line2 = new File("C:\\Users\\casa\\Downloads\\predicciones.txt");          
+		File line2 = new File("predicciones.txt");          
 		Scanner fila2 = new Scanner(line2); // se abre el archivo de predicciones 
 		int tp_1 = 0; //contadores 
 		int fp_1 = 0;
@@ -171,7 +176,7 @@ public class Taller_POO
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
 		double[] accuracy= new double[4];
 		
-		File line2 = new File("C:\\Users\\casa\\Downloads\\predicciones.txt");          
+		File line2 = new File("predicciones.txt");          
 		Scanner fila2 = new Scanner(line2); // se abre el archivo de predicciones 
 		
 		if (opcion == 4) 
