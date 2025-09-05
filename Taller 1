@@ -1,10 +1,10 @@
-package webada;
+package Taller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class clasesita {
+public class Taller_POO {
 
 	public static void main(String[] args) throws IOException
 	{
@@ -95,6 +95,7 @@ public class clasesita {
 
 				} else if (opcion_elegida == 4) {
 					mostrar_accurancy(opcion_elegida);
+
 				}
 			}else if(usuario_admin.equals("A")) //Si se ingresa "A" se accede al menú de administrador.
 			{	System.out.println("------------------");
@@ -107,7 +108,13 @@ public class clasesita {
 				int opcion_elegida = Integer.parseInt(verificar.nextLine());//El usuario elige una opción (un entero)
 				if (opcion_elegida == 1) 
 				{
+					System.out.println("------------------");
+					System.out.println(" ");
+					System.out.println("Matriz completa de métricas");
+					System.out.println(" ");
 					matrizCompletaMetricas(opcion_elegida);
+					System.out.println("------------------");
+
 				}
 			}
 			
@@ -237,59 +244,58 @@ public class clasesita {
 	}
 	public static void matrizCompletaMetricas(int opcion) throws FileNotFoundException 
 	{
+		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
 		int[] confusion = new int[4];
 		File line2 = new File("predicciones.txt");          
-		Scanner fila2 = new Scanner(line2); // se abre el archivo de predicciones 
-		int k = 0;
 		
 		if (opcion == 1) 
 		{
-			while(fila2.hasNextLine()) // se recorre el archivo de predicciones 
+			for (int i = 0; i<experimentos.length; i++) 
 			{
-//				double tp_1 = 0; //contadores 
-//				double fp_1 = 0;
-//				double tn_1 = 0;
-//				double fn_1 = 0;
-				String linea= fila2.nextLine();
-				String[] partes = linea.split(";");
+				double tp = 0;
+				double fp=0;   // contadores
+				double tn  = 0;
+				double fn = 0;
 				
-				String experimento = partes[0];
-				int real = Integer.valueOf(partes[1]);
-				int predicho = Integer.valueOf(partes[2]);
-				
-				for (int i =0; i<confusion. -1; i++) 
+				Scanner fila2 = new Scanner(line2); 
+				String experimento_buscar = experimentos[i];
+				while(fila2.hasNextLine()) // recorre el archivo
 				{
-					System.out.println(experimento + " " + real+ " " + predicho);
-					double tp_1 = 0; //contadores 
-					double fp_1 = 0;
-					double tn_1 = 0;
-					double fn_1 = 0;
-					if(experimento.equalsIgnoreCase(experimentos[i])) 
+					String linea = fila2.nextLine();
+					String[] partes= linea.split(";");
+					
+					String experimento = partes[0];
+					int real = Integer.parseInt(partes[1]);
+					int predicho  = Integer.parseInt(partes[2]);
+					
+					if (experimento.equalsIgnoreCase(experimento_buscar)) 
 					{
-						if (real == 1 && predicho ==1) {
-							tp_1++;
+						if(real == 1 && predicho == 1) {					// ciclo while y sigue con experimentos[1]
+							tp++;								//tambien al momento de salir se printea la matriz por cada proyecto
+							
 						}else if (real == 0 && predicho == 1) {
-							fp_1++;
-						}else if (real == 0 && predicho == 0) {
-							tn_1++;
+							fp++;
+						}else if ( real == 0 && predicho == 0) {
+							tn++;
 						}else if (real == 1 && predicho == 0) {
-							fn_1++;
-						}System.out.println("salta");
+							fn++;
+						}
 					}
-
-
-				} 
-//				double Accuracy  = (tp_1+ tn_1) / (tp_1+ fp_1 + tn_1 + fn_1);// se siguen las formulas del taller 
-//				double Precision  = tp_1 / (tp_1 + fp_1);
-//				double Recall  = tp_1 / (tp_1 + fn_1);
-//				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
-				//System.out.println(experimento);
+				}fila2.close();
+				double Accuracy  = (tp+ tn) / (tp + fp + tn + fn);// se siguen las formulas del taller 
+				double Precision  = tp / (tp + fp);
+				double Recall  = tp / (tp + fn);
+				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
+				
+				System.out.println("     | Accuracy | Precision | Recall | F1_score ");
+				System.out.printf("%s:| %.2f     | %.2f      |  %.2f  | %.2f%n",experimento_buscar, Accuracy,Precision,Recall,f1_score);
+				
 			}
-
-		}
 			
 		}
+	}
+	
 		
 		
 	
