@@ -118,9 +118,11 @@ public class Taller_POO {
 
 				}else if (opcion_elegida ==2) 
 				{
-					System.out.println("aaa");
 					mejorf1_score();
 
+				}else if (opcion_elegida == 3) 
+				{
+					promedio_por_metrica();
 				}
 			}
 			
@@ -343,7 +345,7 @@ public class Taller_POO {
 					}
 				}fila2.close();
 				
-				double Accuracy  = (tp+ tn) / (tp + fp + tn + fn);// se siguen las formulas del taller 
+				// se siguen las formulas del taller 
 				double Precision  = tp / (tp + fp);
 				double Recall  = tp / (tp + fn);
 				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
@@ -360,7 +362,70 @@ public class Taller_POO {
 			System.out.println("------------------");
 
 	}
+	public static void promedio_por_metrica() throws FileNotFoundException 
+	{
 		
+		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
+		//int[] confusion = new int[4];
+		File line2 = new File("predicciones.txt");          
+		double total_acurracy = 0;
+		double total_precision= 0;
+		double total_recall  = 0;
+		double total_f1score = 0;
+		
+			for (int i = 0; i<experimentos.length; i++) 
+			{  
+				double tp = 0;
+				double fp=0;   // contadores
+				double tn  = 0;
+				double fn = 0;
+				
+				Scanner fila2 = new Scanner(line2); 
+				String experimento_buscar = experimentos[i];
+				while(fila2.hasNextLine()) // recorre el archivo
+				{
+					String linea = fila2.nextLine();
+					String[] partes= linea.split(";");
+					
+					String experimento = partes[0];
+					int real = Integer.parseInt(partes[1]);
+					int predicho  = Integer.parseInt(partes[2]);
+					
+					if (experimento.equalsIgnoreCase(experimento_buscar)) 
+					{
+						if(real == 1 && predicho == 1) {					
+							tp++;								
+						}else if (real == 0 && predicho == 1) {
+							fp++;
+						}else if ( real == 0 && predicho == 0) {
+							tn++;
+						}else if (real == 1 && predicho == 0) {
+							fn++;
+						}
+					}
+				}fila2.close();
+				
+				double Accuracy  = (tp+ tn) / (tp + fp + tn + fn);
+				double Precision  = tp / (tp + fp);
+				double Recall  = tp / (tp + fn);
+				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
+				
+				total_acurracy+=Accuracy;
+				total_precision += Precision;
+				total_recall+= Recall;
+				total_f1score += f1_score;
+				
+			}
+			int total = experimentos.length;
+			double promedio_acu =total_acurracy/total;
+			
+			System.out.printf("Promedio global total de Accuracy: "+ promedio_acu);
+			System.out.println("Promedio global total de Precision: "+ (total_precision/total));
+			System.out.println("Promedio global total de Recall: "+ (total_recall/total));
+			System.out.println("Promedio global total de F1-Score: "+ (total_f1score/total));
+
+			
+	}		
 		
 	
 }
