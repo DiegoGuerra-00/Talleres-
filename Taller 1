@@ -1,11 +1,11 @@
-package Taller;
+package weaita;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 
-public class Taller_POO {
+public class lal {
 
 	public static void main(String[] args) throws IOException
 	{
@@ -99,7 +99,8 @@ public class Taller_POO {
 
 				}
 			}else if(usuario_admin.equals("A")) //Si se ingresa "A" se accede al menú de administrador.
-			{	System.out.println("------------------");
+			{
+				System.out.println("------------------");
 				System.out.println("MENÚ ADMIN:");
 				System.out.println("1. Ver la matriz completa de métricas\n"
 						+ "2. Identificar el experimento con mejor F1-Score\n"
@@ -129,6 +130,16 @@ public class Taller_POO {
 					System.out.println(" ");
 					System.out.println("------------------");
 
+				}else if (opcion_elegida == 4) 
+				{
+					System.out.println("------------------");
+					System.out.println("Ingrese 2 experimentos para comparar ");
+					System.out.print("1. ");
+					String exp_n = verificar.nextLine().toUpperCase();
+					System.out.print("2. ");
+					String exp_n2 = verificar.nextLine().toUpperCase();
+			
+					System.out.println("es"+exp_n+" "+exp_n2 );
 				}
 			}
 			
@@ -369,7 +380,7 @@ public class Taller_POO {
 			}
 			f1_mejor = Math.round(f1_mejor*100.0)/100.0;
 			System.out.println("------------------");
-			System.out.println("El experimento con mejor F1-Score es: "+ mejorexp+"con un F1_Score de "+f1_mejor);
+			System.out.println("El experimento con mejor F1-Score es: "+ mejorexp+" con un F1_Score de "+f1_mejor);
 			System.out.println("------------------");
 
 	}
@@ -421,7 +432,7 @@ public class Taller_POO {
 				double Recall  = tp / (tp + fn);
 				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
 				
-				total_acurracy+=Accuracy;     /* los resultados de las formulas se van guardando en los contadores generales 
+				total_acurracy+=Accuracy;    
 				total_precision += Precision;
 				total_recall+= Recall;
 				total_f1score += f1_score;
@@ -438,10 +449,10 @@ public class Taller_POO {
 			promedio_f1_score = Math.round(promedio_f1_score*100.0)/100.0;
 
 			
-			System.out.println("Promedio global total de Accuracy: "+ promedio_acuracy);
-			System.out.println("Promedio global total de Precision: "+ promedio_precision);
-			System.out.println("Promedio global total de Recall: "+ promedio_recall);
-			System.out.println("Promedio global total de F1-Score: "+ promedio_f1_score);
+			System.out.println("Promedio global de Accuracy: "+ promedio_acuracy);
+			System.out.println("Promedio global de Precision: "+ promedio_precision);
+			System.out.println("Promedio global de Recall: "+ promedio_recall);
+			System.out.println("Promedio global de F1-Score: "+ promedio_f1_score);
 
 			
 	}		
