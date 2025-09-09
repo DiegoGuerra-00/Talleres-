@@ -122,7 +122,13 @@ public class Taller_POO {
 
 				}else if (opcion_elegida == 3) 
 				{
+					System.out.println("------------------");
+					System.out.println("Promedio global de cada métrica:");
+					System.out.println(" ");
 					promedio_por_metrica();
+					System.out.println(" ");
+					System.out.println("------------------");
+
 				}
 			}
 			
@@ -296,10 +302,14 @@ public class Taller_POO {
 				double Precision  = tp / (tp + fp);
 				double Recall  = tp / (tp + fn);
 				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
+				Accuracy = Math.round(Accuracy*100.0)/100.0;
+				Precision = Math.round(Precision*100.0)/100.0;
+				Recall = Math.round(Recall*100.0)/100.0;
+				f1_score = Math.round(f1_score*100.0)/100.0;
+
 				
 				System.out.println("     | Accuracy | Precision | Recall | F1_score ");
-				System.out.printf("%s:| %.2f     | %.2f      |  %.2f  | %.2f%n",experimento_buscar, Accuracy,Precision,Recall,f1_score);
-				
+				System.out.println(experimento_buscar+" | "+Accuracy+"     | "+Precision+"      | "+Recall+"    | "+f1_score);
 			}
 		}
 	}
@@ -356,9 +366,10 @@ public class Taller_POO {
 					
 				}
 				
-			}System.out.println("------------------");
-			System.out.print("El experimento con mejor F1-Score es: "+ mejorexp);
-			System.out.printf(" con un F1_Score de  %.2f%n",f1_mejor);
+			}
+			f1_mejor = Math.round(f1_mejor*100.0)/100.0;
+			System.out.println("------------------");
+			System.out.println("El experimento con mejor F1-Score es: "+ mejorexp+"con un F1_Score de "+f1_mejor);
 			System.out.println("------------------");
 
 	}
