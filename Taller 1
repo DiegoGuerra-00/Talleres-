@@ -373,18 +373,18 @@ public class Taller_POO {
 			System.out.println("------------------");
 
 	}
-	public static void promedio_por_metrica() throws FileNotFoundException 
+	public static void promedio_por_metrica() throws FileNotFoundException // se crea un metodo que mostrara el promedio global de cada métrica
 	{
 		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
 		//int[] confusion = new int[4];
 		File line2 = new File("predicciones.txt");          
-		double total_acurracy = 0;
-		double total_precision= 0;
+		double total_acurracy = 0; // se crean contadores generales fuera del ciclo for para ser usados en el promedio general 
+		double total_precision= 0; 
 		double total_recall  = 0;
 		double total_f1score = 0;
 		
-			for (int i = 0; i<experimentos.length; i++) 
+			for (int i = 0; i<experimentos.length; i++) // Este for recorre 4 veces que vienen siendo los 4 experimentos 
 			{  
 				double tp = 0;
 				double fp=0;   // contadores
@@ -393,7 +393,7 @@ public class Taller_POO {
 				
 				Scanner fila2 = new Scanner(line2); 
 				String experimento_buscar = experimentos[i];
-				while(fila2.hasNextLine()) // recorre el archivo
+				while(fila2.hasNextLine()) // recorre el archivo con las metricas 
 				{
 					String linea = fila2.nextLine();
 					String[] partes= linea.split(";");
@@ -404,7 +404,7 @@ public class Taller_POO {
 					
 					if (experimento.equalsIgnoreCase(experimento_buscar)) 
 					{
-						if(real == 1 && predicho == 1) {					
+						if(real == 1 && predicho == 1) { // cada vez que se encuentre cierta condicion, se le sumara 1 a los contadores 			
 							tp++;								
 						}else if (real == 0 && predicho == 1) {
 							fp++;
@@ -417,11 +417,11 @@ public class Taller_POO {
 				}fila2.close();
 				
 				double Accuracy  = (tp+ tn) / (tp + fp + tn + fn);
-				double Precision  = tp / (tp + fp);
+				double Precision  = tp / (tp + fp);    // mismas formulas que le taller, se usan los contadores 
 				double Recall  = tp / (tp + fn);
 				double f1_score = 2 * (Precision  * Recall) / (Precision + Recall);
 				
-				total_acurracy+=Accuracy;
+				total_acurracy+=Accuracy;     /* los resultados de las formulas se van guardando en los contadores generales 
 				total_precision += Precision;
 				total_recall+= Recall;
 				total_f1score += f1_score;
