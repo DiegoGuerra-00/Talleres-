@@ -417,12 +417,20 @@ public class Taller_POO {
 				
 			}
 			int total = experimentos.length;
-			double promedio_acu =total_acurracy/total;
+			double promedio_acuracy =total_acurracy/total;
+			double promedio_precision=total_precision/total;
+			double promedio_recall =total_recall/total;
+			double promedio_f1_score =total_f1score/total;
+			promedio_acuracy = Math.round(promedio_acuracy*100.0)/100.0;
+			promedio_precision = Math.round(promedio_precision*100.0)/100.0;
+			promedio_recall = Math.round(promedio_recall*100.0)/100.0;
+			promedio_f1_score = Math.round(promedio_f1_score*100.0)/100.0;
+
 			
-			System.out.printf("Promedio global total de Accuracy: "+ promedio_acu);
-			System.out.println("Promedio global total de Precision: "+ (total_precision/total));
-			System.out.println("Promedio global total de Recall: "+ (total_recall/total));
-			System.out.println("Promedio global total de F1-Score: "+ (total_f1score/total));
+			System.out.println("Promedio global total de Accuracy: "+ promedio_acuracy);
+			System.out.println("Promedio global total de Precision: "+ promedio_precision);
+			System.out.println("Promedio global total de Recall: "+ promedio_recall);
+			System.out.println("Promedio global total de F1-Score: "+ promedio_f1_score);
 
 			
 	}		
