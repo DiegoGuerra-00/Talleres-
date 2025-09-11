@@ -590,7 +590,7 @@ public class miniwea {
 		
 		
 	}
-	public static void() {
+	public static void() {  // pal puntaje extra aña
 		double[] tps = new double[4];
 		double[] fps = new double[4];
 		double[] tns = new double[4];
@@ -631,7 +631,7 @@ public class miniwea {
 				}
 			}fila2.close();
 			
-			tps[i] = tp;
+			tps[i] = tp; // falta hacer contadores y matriz 
 			fps[i]  = fp;
 			
 		}
