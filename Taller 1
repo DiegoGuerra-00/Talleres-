@@ -1,10 +1,10 @@
-package Taller;
+package weawea;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Taller_POO {
+public class miniwea {
 
 	public static void main(String[] args) throws IOException
 	{
@@ -87,7 +87,13 @@ public class Taller_POO {
 					double Recall  = recall(tp, fn);
 					double f1_score = f1_score(Precision, Recall);
 					
+					Accuracy = Math.round(Accuracy * 100.0)/100.0;
+					Precision = Math.round(Precision * 100.0)/100.0;
+					Recall = Math.round(Recall * 100.0)/100.0;
+					f1_score = Math.round(f1_score * 100.0)/100.0;
+
 					System.out.println(" ");
+					System.out.println("------------------");
 					System.out.println("MÉTRICAS DE EXPERIMENTO "+nuevo_exp); // se muestra en pantalla 
 					System.out.println(" ");
 					System.out.println("Accuracy: "+Accuracy+"\n" +"Precision: "+Precision+"\n"+"Recall: "+Recall+"\n"+"F1: "+f1_score);
@@ -115,6 +121,7 @@ public class Taller_POO {
 					System.out.println("Matriz completa de métricas");
 					System.out.println(" ");
 					matrizCompletaMetricas(opcion_elegida);
+					System.out.println(" ");
 					System.out.println("------------------");
 				}
 				else if (opcion_elegida ==2) 
@@ -134,19 +141,21 @@ public class Taller_POO {
 				else if (opcion_elegida == 4) 
 				{
 					System.out.println("------------------");
-					System.out.println("Ingrese 2 experimentos para comparar (Exp1, Exp2, Exp3, Exp4)");
+					System.out.println("Ingrese 2 experimentos para comparar (Exp1, Exp2, Exp3, Exp4)");				
+					System.out.println(" ");
 					System.out.print("1. ");
 					String exp_n = verificar.nextLine().toUpperCase();
 					System.out.print("2. ");
 					String exp_n2 = verificar.nextLine().toUpperCase();
-					System.out.println("------------------");					
+					System.out.println(" ");
+					System.out.println("------------------");	
+					System.out.println(" ");
 					compararDosExperimentos(exp_n, exp_n2);
-					
 					System.out.println("------------------");					
 
 				}
 			}
-			else if(usuario_admin.equals("S|")) 
+			else if(usuario_admin.equals("S")) 
 			{
 				break;// el usuario al elegir "S" se sale del progama.| 
 			}
@@ -191,8 +200,8 @@ public class Taller_POO {
 			System.out.println(" ");
 			System.out.println("MATRIZ DE CONFUSIÓN DE " + numero_exp);
 			System.out.println(" ");
-			System.out.println("TP || FP || TN || FN \n" +
-					tp_1+" || "+fp_1+"  || "+tn_1+" || "+fn_1);
+			System.out.println(" TP  ||  FP  ||  TN  ||  FN  \n  " +
+					tp_1+" ||  "+fp_1+"   ||  "+tn_1+"  ||  "+fn_1);
 			System.out.println("");
 			return null;			
 		
@@ -567,6 +576,7 @@ public class Taller_POO {
 		System.out.println("FP:           "+fps[0]+"  | "+fps[1]);
 		System.out.println("TN:           "+tns[0]+" | "+tns[1]);
 		System.out.println("FN:           "+fns[0]+"  | "+fns[1]);
+		System.out.println(" ");
 		System.out.println("------------------");
 		if (contadorExp1 ==3) {
 			System.out.println("El "+exp1+" es buen modelo");
@@ -580,6 +590,63 @@ public class Taller_POO {
 		
 		
 	}
+	public static void() {
+		double[] tps = new double[4];
+		double[] fps = new double[4];
+		double[] tns = new double[4];
+		double[] fns = new double[4];
+		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
+		File line2 = new File("predicciones.txt");          
+
+		for (int i = 0; i < experimentos.length; i++) 
+		{
+			
+			double tp = 0;
+			double fp=0;   // contadores
+			double tn  = 0;
+			double fn = 0;
+			
+			Scanner fila2 = new Scanner(line2); 
+			String experimento_actual = experimentos[i];
+			while(fila2.hasNextLine()) 
+			{
+				String linea = fila2.nextLine();
+				String[] partes= linea.split(";");
+				
+				String experimento = partes[0];
+				int real = Integer.parseInt(partes[1]);
+				int predicho  = Integer.parseInt(partes[2]);
+
+				if (experimento.equalsIgnoreCase(experimento_actual)) 
+				{
+					if(real == 1 && predicho == 1) { // cada vez que se encuentre cierta condicion, se le sumara 1 a los contadores 			
+						tp++;								
+					}else if (real == 0 && predicho == 1) {
+						fp++;
+					}else if ( real == 0 && predicho == 0) {
+						tn++;
+					}else if (real == 1 && predicho == 0) {
+						fn++;
+					}
+				}
+			}fila2.close();
+			
+			tps[i] = tp;
+			fps[i]  = fp;
+			
+		}
+ 		
+		
+		
+
+	}
+	
+	
+	
+	
+	
+	
+	
 	public static double accuracy(double tp, double tn, double fp, double fn)  //Se crean metodos para cada metrica
 	{	
 		return (tp+ tn) / (tp + fp + tn + fn);								
