@@ -1,25 +1,26 @@
-package weawea;
+package DiegoGuerra_JoaquinBerenguela_Taller1Poo;
+
+// Diego Guerra Estay || 21686594-4 || ICCI
+// Joaquin Berenguela Caimanque || 21.708.988-3 || ICCI
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class miniwea {
+public class App {
 
-	public static void main(String[] args) throws IOException
-	{
-		while (true) 
-		{
+	public static void main(String[] args) throws IOException{
+		
+		while (true) {
+			
 			Scanner verificar = new Scanner(System.in);  //USAR VERIFICAR PARA TEMA DE INPUT
 			
 			System.out.print("¿MENÚ USUARIO O MENÚ ADMIN? (U/A/S para salir): ");
 			String usuario_admin = verificar.nextLine().toUpperCase(); //USA "toUpperCase" para que siempre sea mayuscula
 			
-			
-			if (usuario_admin.equals("U"))// Si se ingresa "U", se accede al menú de usuario y se muestran las opciones
-			{
-				
-				
+			if (usuario_admin.equals("U")) {// Si se ingresa "U", se accede al menú de usuario y se muestran las opciones
+							
 				System.out.println("------------------");
 				System.out.println("MENÚ USUARIO:");
 				System.out.println("1. Ver lista experimentos \n" + 
@@ -28,17 +29,19 @@ public class miniwea {
 									"4. Ver promedio de Accuracy de todos los modelos"
 									);
 				System.out.print("Seleccione una opción (1,2,3 o 4): ");
+				
 				int opcion_elegida = Integer.parseInt(verificar.nextLine());//El usuario elige una opción (un entero)
 				
-				if (opcion_elegida == 1) 
-				{ //Opcion 1, se muestran los experimentos 
+				if (opcion_elegida == 1) {
+				 //Opcion 1, se muestran los experimentos 
+					
 					System.out.println("------------------");
 					System.out.println("Lista experimentos:");
 					File line = new File("experimentos.txt"); // se abre el archivo
 					Scanner fila = new Scanner(line);								// con los experimentos
 						
-					while(fila.hasNextLine()) // se recorre el archivo 
-					{
+					while(fila.hasNextLine()) {// se recorre el archivo 
+					
 						String linea = fila.nextLine();
 						String[] partes = linea.split(";");
 						
@@ -47,11 +50,14 @@ public class miniwea {
 						
 						System.out.println(identificador+" " + descripcion);	// se muestran por pantalla los experimentos
 					}fila.close();
+					
 					System.out.println("------------------");
-
+																
 				}
-				else if(opcion_elegida == 2) 
-				{ // opción 2, se muestra un exp en especifico 
+				
+				else if(opcion_elegida == 2) {
+					// opción 2, se muestra un exp en especifico 
+					
 					System.out.println("------------------");
 					System.out.print("Eliga un experimento (Exp1, Exp2, Exp3, Exp4): ");
 					String nuevo_exp = verificar.nextLine().toUpperCase();// sera si o si en mayuscula 
@@ -65,19 +71,21 @@ public class miniwea {
 					matriz_confusion(nuevo_exp,0); // Se llama al metodo y se muestra el resultado 
 					System.out.println("------------------");
 					
-				}else if (opcion_elegida == 3)// lo mismo con la opción 3
-				{
+				}else if (opcion_elegida == 3) {// lo mismo con la opción 3
+				
 					System.out.println("------------------");
 					System.out.print("Eliga un experimento (Exp1, Exp2, Exp3, Exp4): ");
 					String nuevo_exp = verificar.nextLine().toUpperCase();
-					while (!nuevo_exp.equals("EXP1") && !nuevo_exp.equals("EXP2") && !nuevo_exp.equals("EXP3") && (!nuevo_exp.equals("EXP4"))) 
-					{
+					
+					while (!nuevo_exp.equals("EXP1") && !nuevo_exp.equals("EXP2") && !nuevo_exp.equals("EXP3") && (!nuevo_exp.equals("EXP4"))) {
+						
 						System.out.println("Error, debe ingresar 'Exp1', 'Exp2', 'Exp3' o 'Exp4'"); // en este while se hace una prueba de error
 						System.out.print("Eliga un experimento: ");
 						nuevo_exp = verificar.nextLine().toUpperCase();
 					}
-					matriz_confusion(nuevo_exp,opcion_elegida); // se retorna una lista con todos los contadores del respectivo proyecto
-					double tp = matriz_confusion(nuevo_exp,opcion_elegida)[0];// se almacenan en variables
+					matriz_confusion(nuevo_exp,opcion_elegida); // Se retorna una lista con todos los contadores del respectivo proyecto.
+																// Luego se almacenan en variables.
+					double tp = matriz_confusion(nuevo_exp,opcion_elegida)[0];
 					double fp = matriz_confusion(nuevo_exp,opcion_elegida)[1];
 					double tn = matriz_confusion(nuevo_exp,opcion_elegida)[2];
 					double fn = matriz_confusion(nuevo_exp,opcion_elegida)[3];
@@ -104,8 +112,8 @@ public class miniwea {
 					mostrar_accurancy(opcion_elegida);
 				}
 			}
-			else if(usuario_admin.equals("A")) //Si se ingresa "A" se accede al menú de administrador.
-			{
+			else if(usuario_admin.equals("A")){ //Si se ingresa "A" se accede al menú de administrador.
+			
 				System.out.println("------------------");
 				System.out.println("MENÚ ADMIN:");
 				System.out.println("1. Ver la matriz completa de métricas\n"
@@ -113,9 +121,11 @@ public class miniwea {
 						+ "3. Calcular el promedio global de cada métrica\n"
 						+ "4. Comparar dos experimentos lado a lado");
 				System.out.print("Seleccione una opción (1,2,3 o 4): ");
+				
 				int opcion_elegida = Integer.parseInt(verificar.nextLine());//El usuario elige una opción (un entero)
-				if (opcion_elegida == 1) 
-				{
+				
+				if (opcion_elegida == 1) {
+					
 					System.out.println("------------------");
 					System.out.println(" ");
 					System.out.println("Matriz completa de métricas");
@@ -124,12 +134,12 @@ public class miniwea {
 					System.out.println(" ");
 					System.out.println("------------------");
 				}
-				else if (opcion_elegida ==2) 
-				{
+				else if (opcion_elegida ==2) {
+				
 					mejorf1_score();
 				}
-				else if (opcion_elegida == 3) 
-				{
+				else if (opcion_elegida == 3) {
+				
 					System.out.println("------------------");
 					System.out.println("Promedio global de cada métrica:");
 					System.out.println(" ");
@@ -138,8 +148,8 @@ public class miniwea {
 					System.out.println("------------------");
 
 				}
-				else if (opcion_elegida == 4) 
-				{
+				else if (opcion_elegida == 4) {
+				
 					System.out.println("------------------");
 					System.out.println("Ingrese 2 experimentos para comparar (Exp1, Exp2, Exp3, Exp4)");				
 					System.out.println(" ");
@@ -154,26 +164,27 @@ public class miniwea {
 					System.out.println("------------------");					
 
 				}
-			}
-			else if(usuario_admin.equals("S")) 
-			{
-				break;// el usuario al elegir "S" se sale del progama.| 
+			}else if(usuario_admin.equals("S")) {
+				break;// el usuario al elegir "S" se sale del programa.| 
 			}
 		}
+		
 		System.out.println(" ");
 		System.out.println("Saliendo....");
 
 	}
-	public static int[] matriz_confusion(String numero_exp, int opcion) throws FileNotFoundException // Se crea un metodo que reciba como parametro
-	{																					// un experimento que el usuario ingrese
+	public static int[] matriz_confusion(String numero_exp, int opcion) throws FileNotFoundException {// Se crea un metodo que reciba como parametro
+																									 //  un experimento que el usuario ingrese.
 		File line2 = new File("predicciones.txt");          
 		Scanner fila2 = new Scanner(line2); // se abre el archivo de predicciones 
+		
 		int tp_1 = 0; //contadores 
 		int fp_1 = 0;
 		int tn_1 = 0;
 		int fn_1 = 0;
-		while(fila2.hasNextLine()) // se recorre el archivo de predicciones 
-		{
+		
+		while(fila2.hasNextLine()){ // se recorre el archivo de predicciones 
+		
 			String linea= fila2.nextLine();
 			String[] partes = linea.split(";");
 			
@@ -181,17 +192,16 @@ public class miniwea {
 			int real = Integer.valueOf(partes[1]);
 			int predicho = Integer.valueOf(partes[2]);
 			
-			if (experimento.equalsIgnoreCase(numero_exp))// sea el exp que sea lo tomara en cuenta
-			{
-				
-				if (real == 1 &&predicho== 1) {
-					tp_1 +=1;
-				}else if (real == 0 &&predicho== 1) {
-					fp_1 +=1;
-				}else if(real == 0 &&predicho== 0) {
-					tn_1 +=1;
-				}else if(real == 1 &&predicho== 0) {
-					fn_1 +=1;
+			if (experimento.equalsIgnoreCase(numero_exp)) {// sea el exp que sea lo tomara en cuenta
+
+				if (real == 1 && predicho == 1) {
+					tp_1 += 1;
+				} else if (real == 0 && predicho == 1) {
+					fp_1 += 1;
+				} else if (real == 0 && predicho == 0) {
+					tn_1 += 1;
+				} else if (real == 1 && predicho == 0) {
+					fn_1 += 1;
 				}
 						
 			}
@@ -205,16 +215,16 @@ public class miniwea {
 			System.out.println("");
 			return null;			
 		
-		}else if (opcion == 3 && (numero_exp.equals("EXP1") || numero_exp.equals("EXP2") ||numero_exp.equals("EXP3") ||numero_exp.equals("EXP4")) ) 
-		{
+		}else if (opcion == 3 && (numero_exp.equals("EXP1") || numero_exp.equals("EXP2") ||
+				  numero_exp.equals("EXP3") ||numero_exp.equals("EXP4")) ) {
 			return new int[] {tp_1,fp_1,tn_1,fn_1};// se guardan los contadores en una lista para luego ser usados
 		}
 	
 		return null;
 		}
 	
-	public static void mostrar_accurancy(int opcion) throws FileNotFoundException 
-	{ // la funcion de este metodo es almancerar todos los "accuracy" de cada experimento
+	public static void mostrar_accurancy(int opcion) throws FileNotFoundException { 
+		// el propósito de este método es almancerar todos los "accuracy" de cada experimento.
 		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
 		double[] accuracy= new double[4];
@@ -222,10 +232,10 @@ public class miniwea {
 		File line2 = new File("predicciones.txt");          
 		Scanner fila2 = new Scanner(line2); // se abre el archivo de predicciones 
 		
-		if (opcion == 4) 
-		{
-			while(fila2.hasNextLine()) // se recorre el archivo de predicciones 
-			{
+		if (opcion == 4) {
+			
+			while(fila2.hasNextLine()) {// se recorre el archivo de predicciones 
+			
 				String linea= fila2.nextLine();
 				String[] partes = linea.split(";");
 				
@@ -234,8 +244,8 @@ public class miniwea {
 				int predicho = Integer.valueOf(partes[2]);
 				
 				
-				for (int i = 0; i<4; i++) //se usa un ciclo que llama otro metodo, en el se almacena el total de accuracy por exp
-				{
+				for (int i = 0; i<4; i++) {//se usa un ciclo que llama otro metodo, en el se almacena el total de accuracy por exp
+				
 					if(experimento.equalsIgnoreCase(experimentos[i])) 
 					{
 						accuracy[i] += accuracy_tot(real,predicho);// se le agrega  a lista el total de accuracy por experimento
@@ -243,7 +253,6 @@ public class miniwea {
 					}
 				}	
 			}
-	
 		}	
 		System.out.println("------------------");
 		System.out.println("Promedio de Accuracy de todos los modelos");
@@ -258,13 +267,13 @@ public class miniwea {
 		System.out.println("------------------");
 
 	}
-	public static double accuracy_tot( int real, int predicho) 
-	{
+	public static double accuracy_tot( int real, int predicho) 	{
 		
 			int tp_1 = 0; //contadores 
 			int fp_1 = 0;
 			int tn_1 = 0;
 			int fn_1 = 0;
+			
 			if (real == 1 &&predicho== 1) {
 				tp_1 +=1;
 			}else if (real == 0 &&predicho== 1) {
@@ -276,24 +285,23 @@ public class miniwea {
 			}return	(double)(tp_1+ tn_1) / (tp_1+ fp_1 + tn_1+fn_1);
 	
 	}
-	public static void matrizCompletaMetricas(int opcion) throws FileNotFoundException 
-	{
+	public static void matrizCompletaMetricas(int opcion) throws FileNotFoundException 	{
 		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
-		//int[] confusion = new int[4];
 		File line2 = new File("predicciones.txt");          
 		
-		if (opcion == 1) 
-		{
-			for (int i = 0; i<experimentos.length; i++) 
-			{  
+		if (opcion == 1) {
+		
+			for (int i = 0; i<experimentos.length; i++) {
+		  
 				double tp = 0;
-				double fp=0;   // contadores
-				double tn  = 0;
+				double fp = 0;   // contadores
+				double tn = 0;
 				double fn = 0;
 				
 				Scanner fila2 = new Scanner(line2); 
 				String experimento_buscar = experimentos[i];
+				
 				while(fila2.hasNextLine()) // recorre el archivo
 				{
 					String linea = fila2.nextLine();
@@ -303,10 +311,10 @@ public class miniwea {
 					int real = Integer.parseInt(partes[1]);
 					int predicho  = Integer.parseInt(partes[2]);
 					
-					if (experimento.equalsIgnoreCase(experimento_buscar)) 
-					{
+					if (experimento.equalsIgnoreCase(experimento_buscar)) {
+					 
 						if(real == 1 && predicho == 1) {	// ciclo while y sigue con experimentos[1]
-							tp++;					//tambien al momento de salir se printea la matriz por cada proyecto
+							tp++;							//tambien al momento de salir se printea la matriz por cada proyecto
 							
 						}else if (real == 0 && predicho == 1) {
 							fp++;
@@ -327,32 +335,30 @@ public class miniwea {
 				Precision = Math.round(Precision*100.0)/100.0;
 				Recall = Math.round(Recall*100.0)/100.0;
 				f1_score = Math.round(f1_score*100.0)/100.0;
-
 				
 				System.out.println("     | Accuracy | Precision | Recall | F1_score ");
 				System.out.println(experimento_buscar+" | "+Accuracy+"     | "+Precision+"      | "+Recall+"    | "+f1_score);
 			}
 		}
 	}
-	public static void mejorf1_score() throws FileNotFoundException 
-	{
+	public static void mejorf1_score() throws FileNotFoundException {
 		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
-		//int[] confusion = new int[4];
 		File line2 = new File("predicciones.txt");          
 		String mejorexp = "";
 		double f1_mejor = -1;
+		
 			for (int i = 0; i<experimentos.length; i++) 
 			{  
 				double tp = 0;
-				double fp=0;   // contadores
-				double tn  = 0;
+				double fp = 0;   // contadores
+				double tn = 0;
 				double fn = 0;
 				
 				Scanner fila2 = new Scanner(line2); 
 				String experimento_buscar = experimentos[i];
-				while(fila2.hasNextLine()) // recorre el archivo
-				{
+				while(fila2.hasNextLine()){ // Recorre el archivo
+				
 					String linea = fila2.nextLine();
 					String[] partes= linea.split(";");
 					
@@ -360,10 +366,10 @@ public class miniwea {
 					int real = Integer.parseInt(partes[1]);
 					int predicho  = Integer.parseInt(partes[2]);
 					
-					if (experimento.equalsIgnoreCase(experimento_buscar)) 
-					{
-						if(real == 1 && predicho == 1) {					// ciclo while y sigue con experimentos[1]
-							tp++;								//tambien al momento de salir se printea la matriz por cada proyecto
+					if (experimento.equalsIgnoreCase(experimento_buscar)) {
+						
+						if(real == 1 && predicho == 1) {		// Ciclo while y for sigue con experimentos[1].
+							tp++;								// Tambien al momento de salir se printea la matriz por cada proyecto.
 						}else if (real == 0 && predicho == 1) {
 							fp++;
 						}else if ( real == 0 && predicho == 0) {
@@ -378,36 +384,34 @@ public class miniwea {
 				double Precision  = precision(tp, fp);
 				double Recall  = recall(tp, fn);
 				double f1_score = f1_score(Precision, Recall);
-				if(f1_score>f1_mejor) 
-				{
+				
+				if(f1_score>f1_mejor) {
 					mejorexp= experimento_buscar;
 					f1_mejor = f1_score;
-					
 				}
-				
 			}
+			
 			f1_mejor = Math.round(f1_mejor*100.0)/100.0;
 			System.out.println("------------------");
 			System.out.println("El experimento con mejor F1-Score es: "+ mejorexp+" con un F1_Score de "+f1_mejor);
 			System.out.println("------------------");
 
 	}
-	public static void promedio_por_metrica() throws FileNotFoundException // se crea un metodo que mostrara el promedio global de cada métrica
-	{
+	public static void promedio_por_metrica() throws FileNotFoundException {// Se crea un método que mostrará el promedio global de cada métrica.
 		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
-		//int[] confusion = new int[4];
-		File line2 = new File("predicciones.txt");          
-		double total_accuracy = 0; // se crean contadores generales fuera del ciclo for para ser usados en el promedio general 
-		double total_precision= 0; 
+		File line2 = new File("predicciones.txt");       
+		
+		double total_accuracy = 0; // Se crean contadores generales fuera del ciclo for para ser usados en el promedio general.
+		double total_precision = 0; 
 		double total_recall  = 0;
 		double total_f1score = 0;
 		
-			for (int i = 0; i<experimentos.length; i++) // Este for recorre 4 veces que vienen siendo los 4 experimentos 
+			for (int i = 0; i<experimentos.length; i++) // Este for recorre 4 veces que son los 4 experimentos. 
 			{  
 				double tp = 0;
-				double fp=0;   // contadores
-				double tn  = 0;
+				double fp = 0;   // contadores
+				double tn = 0;
 				double fn = 0;
 				
 				Scanner fila2 = new Scanner(line2); 
@@ -421,8 +425,8 @@ public class miniwea {
 					int real = Integer.parseInt(partes[1]);
 					int predicho  = Integer.parseInt(partes[2]);
 					
-					if (experimento.equalsIgnoreCase(experimento_buscar)) 
-					{
+					if (experimento.equalsIgnoreCase(experimento_buscar)) {
+					
 						if(real == 1 && predicho == 1) { // cada vez que se encuentre cierta condicion, se le sumara 1 a los contadores 			
 							tp++;								
 						}else if (real == 0 && predicho == 1) {
@@ -446,7 +450,9 @@ public class miniwea {
 				total_f1score += f1_score;
 				
 			}
+			
 			int total = experimentos.length;
+			
 			double promedio_accuracy =total_accuracy/total;
 			double promedio_precision=total_precision/total;
 			double promedio_recall =total_recall/total;
@@ -457,15 +463,14 @@ public class miniwea {
 			promedio_recall = Math.round(promedio_recall*100.0)/100.0;
 			promedio_f1_score = Math.round(promedio_f1_score*100.0)/100.0;
 
-	
 			System.out.println("Promedio global de Accuracy: "+ promedio_accuracy);
 			System.out.println("Promedio global de Precision: "+ promedio_precision);
 			System.out.println("Promedio global de Recall: "+ promedio_recall);
 			System.out.println("Promedio global de F1-Score: "+ promedio_f1_score);
 
 	}	
-	public static void compararDosExperimentos(String exp1, String exp2) throws FileNotFoundException 
-	{
+	public static void compararDosExperimentos(String exp1, String exp2) throws FileNotFoundException {
+		
 		String[] experimentos = {exp1, exp2};
 		File line2 = new File("predicciones.txt");    
 		
@@ -487,14 +492,11 @@ public class miniwea {
 		int contadorExp1 = 0;
 		int contadorExp2 = 0;
 		
-		
-		
-		
-		for (int i =0; i<experimentos.length; i++) 
-		{
+		for (int i =0; i<experimentos.length; i++) {
+			
 			double tp = 0;
-			double fp=0;   // contadores
-			double tn  = 0;
+			double fp = 0;   // contadores
+			double tn = 0;
 			double fn = 0;
 			
 			Scanner fila2 = new Scanner(line2); 
@@ -508,8 +510,8 @@ public class miniwea {
 				int real = Integer.parseInt(partes[1]);
 				int predicho  = Integer.parseInt(partes[2]);
 
-				if (experimento.equalsIgnoreCase(experimento_actual)) 
-				{
+				if (experimento.equalsIgnoreCase(experimento_actual)) {
+				
 					if(real == 1 && predicho == 1) { // cada vez que se encuentre cierta condicion, se le sumara 1 a los contadores 			
 						tp++;								
 					}else if (real == 0 && predicho == 1) {
@@ -526,6 +528,7 @@ public class miniwea {
 			double Precision1 = precision(tp, fp);
 			double Recall1 = recall(tp, fn);
 			double F1_score1 = f1_score(Precision1, Recall1);
+			
 			accurrys[i] = Math.round(Acurracy1*100.0)/100.0;
 			precisions[i]= Math.round(Precision1*100.0)/100.0;
 			recalls[i]= Math.round(Recall1*100.0)/100.0;
@@ -537,33 +540,40 @@ public class miniwea {
 			fns[i] =fn;
 
 		}
+		
+		//Aquí se comparan las metricas de un experimento con otro
+		
 		if (accurrys[0] > accurrys[1]) {
 			experimentoMayorAccu = exp1;
 			contadorExp1++;
+			
 		}else if( accurrys[0] < accurrys[1]) {
 			experimentoMayorAccu = exp2;
 			contadorExp2++;
+			
 		}if (precisions[0]>precisions[1]) {
 			experimentoMayorPrec = exp1;
 			contadorExp1 ++;
+			
 		}else if (precisions[0]<precisions[1]) {
 			experimentoMayorPrec = exp2;
 			contadorExp2++;
+			
 		}if (recalls[0]> recalls[1]) {
 			experimentoMayorRecall = exp1;
 			contadorExp1 ++;
+			
 		}else if(recalls[0]< recalls[1]) {
 			experimentoMayorRecall = exp2;
+			
 			contadorExp2++;
 		}if (f1_Scores[0]> f1_Scores[1]) {
 			experimentoMayorF1= exp1;
+			
 		}else if (f1_Scores[0]< f1_Scores[1]) {
 			experimentoMayorF1= exp2;
 
 		} 
-		
-
-		
 		
 		System.out.println("Metricas    "+ exp1 +" | "+ exp2);
 		System.out.println("Accuracy:   "+ accurrys[0] +" | "+ accurrys[1] +" -- "+ experimentoMayorAccu +" es el mas exacto"); 
@@ -578,28 +588,34 @@ public class miniwea {
 		System.out.println("FN:           "+fns[0]+"  | "+fns[1]);
 		System.out.println(" ");
 		System.out.println("------------------");
+		
 		if (contadorExp1 ==3) {
 			System.out.println("El "+exp1+" es buen modelo");
+			
 		}else if (contadorExp2 == 3) {
 			System.out.println("El "+exp2+" es buen modelo");
+			
 		}if (f1_Scores[0]> f1_Scores[1]) {
 			System.out.println(exp1+ " tiene un mejor F1_score, por ende es mas eficiente"); 
+			
 		}else if(f1_Scores[0]< f1_Scores[1]) {
 			System.out.println(exp2+ " tiene un mejor F1_score, por ende es mas eficiente"); 
+			
 		}
 		
 		
 	}
-	public static void() {  // pal puntaje extra aña
+	public static void compararCSV() throws FileNotFoundException {  // pal puntaje extra aña
+		
 		double[] tps = new double[4];
 		double[] fps = new double[4];
 		double[] tns = new double[4];
 		double[] fns = new double[4];
+		
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
 		File line2 = new File("predicciones.txt");          
 
-		for (int i = 0; i < experimentos.length; i++) 
-		{
+		for (int i = 0; i < experimentos.length; i++) {
 			
 			double tp = 0;
 			double fp=0;   // contadores
@@ -618,7 +634,7 @@ public class miniwea {
 				int predicho  = Integer.parseInt(partes[2]);
 
 				if (experimento.equalsIgnoreCase(experimento_actual)) 
-				{
+					
 					if(real == 1 && predicho == 1) { // cada vez que se encuentre cierta condicion, se le sumara 1 a los contadores 			
 						tp++;								
 					}else if (real == 0 && predicho == 1) {
@@ -629,30 +645,19 @@ public class miniwea {
 						fn++;
 					}
 				}
-			}fila2.close();
-			
-			tps[i] = tp; // falta hacer contadores y matriz 
-			fps[i]  = fp;
+			}
+//		fila2.close();
+//			
+//			tps[i] = tp; // falta hacer contadores y matriz 
+//			fps[i]  = fp;
 			
 		}
- 		
-		
-		
-
-	}
 	
 	
-	
-	
-	
-	
-	
-	public static double accuracy(double tp, double tn, double fp, double fn)  //Se crean metodos para cada metrica
-	{	
+	public static double accuracy(double tp, double tn, double fp, double fn){  //Se crean metodos para cada metrica	
 		return (tp+ tn) / (tp + fp + tn + fn);								
 	}
-	public static double precision(double tp, double fp) 
-	{
+	public static double precision(double tp, double fp) {
 		return tp / (tp + fp);                                            
 	}
 	public static double recall(double tp, double fn) {
@@ -661,7 +666,4 @@ public class miniwea {
 	public static double f1_score(double Precision, double Recall) {
 		return 2* (Precision  * Recall) / (Precision + Recall);
 	}
-	
-	
-	
 }
