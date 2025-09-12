@@ -1,6 +1,6 @@
 package DiegoGuerra_JoaquinBerenguela_Taller1Poo;
 
-// Diego Guerra Estay || 21686594-4 || ICCI
+// Diego Guerra Estay || 21.686.594-4 || ICCI
 // Joaquin Berenguela Caimanque || 21.708.988-3 || ICCI
 
 import java.io.File;
@@ -109,7 +109,7 @@ public class App {
 					System.out.println("------------------");
 
 				} else if (opcion_elegida == 4) {
-					mostrar_accurancy(opcion_elegida);
+					mostrar_accurancy(opcion_elegida);  // muestra por pantalla todos los accurancy 
 				}
 			}
 			else if(usuario_admin.equals("A")){ //Si se ingresa "A" se accede al menú de administrador.
@@ -130,20 +130,20 @@ public class App {
 					System.out.println(" ");
 					System.out.println("Matriz completa de métricas");
 					System.out.println(" ");
-					matrizCompletaMetricas(opcion_elegida);
+					matrizCompletaMetricas(opcion_elegida); //muestra matriz completa de metricas 
 					System.out.println(" ");
 					System.out.println("------------------");
 				}
 				else if (opcion_elegida ==2) {
 				
-					mejorf1_score();
+					mejorf1_score(); // muestra por pantalla el experimento con mejor f1_Score
 				}
 				else if (opcion_elegida == 3) {
 				
 					System.out.println("------------------");
 					System.out.println("Promedio global de cada métrica:");
 					System.out.println(" ");
-					promedio_por_metrica();
+					promedio_por_metrica();  // muestra promedio de cada metrica (globalmente)
 					System.out.println(" ");
 					System.out.println("------------------");
 
@@ -153,14 +153,14 @@ public class App {
 					System.out.println("------------------");
 					System.out.println("Ingrese 2 experimentos para comparar (Exp1, Exp2, Exp3, Exp4)");				
 					System.out.println(" ");
-					System.out.print("1. ");
-					String exp_n = verificar.nextLine().toUpperCase();
+					System.out.print("1. "); 
+					String exp_n = verificar.nextLine().toUpperCase();  // el usuario debe elegir 2 experimentos 
 					System.out.print("2. ");
 					String exp_n2 = verificar.nextLine().toUpperCase();
 					System.out.println(" ");
 					System.out.println("------------------");	
 					System.out.println(" ");
-					compararDosExperimentos(exp_n, exp_n2);
+					compararDosExperimentos(exp_n, exp_n2); // con esos 2 experimentos se hace la comparacion y se muestra por pantalla
 					System.out.println("------------------");					
 
 				}
@@ -327,12 +327,12 @@ public class App {
 				}fila2.close();
 				
 				double Accuracy  = accuracy(tp, tn, fp, fn); // se siguen las formulas del taller 
-				double Precision  = precision(tp, fp);
-				double Recall  = recall(tp, fn);
+				double Precision  = precision(tp, fp);     // y se llaman los metodos de cada metrica 
+				double Recall  = recall(tp, fn);     
 				double f1_score = f1_score(Precision, Recall);
-				
+				 
 				Accuracy = Math.round(Accuracy*100.0)/100.0;
-				Precision = Math.round(Precision*100.0)/100.0;
+				Precision = Math.round(Precision*100.0)/100.0;  // se redondea los double 
 				Recall = Math.round(Recall*100.0)/100.0;
 				f1_score = Math.round(f1_score*100.0)/100.0;
 				
@@ -380,14 +380,14 @@ public class App {
 					}
 				}fila2.close();
 				
-				// se siguen las formulas del taller 
+				// se siguen las formulas del taller llamando los metodos de las metricas 
 				double Precision  = precision(tp, fp);
 				double Recall  = recall(tp, fn);
 				double f1_score = f1_score(Precision, Recall);
 				
-				if(f1_score>f1_mejor) {
+				if(f1_score>f1_mejor) { // se elige el mejor f1_score de los experimentos y se guardan los datos 
 					mejorexp= experimento_buscar;
-					f1_mejor = f1_score;
+					f1_mejor = f1_score;  
 				}
 			}
 			
@@ -454,11 +454,11 @@ public class App {
 			int total = experimentos.length;
 			
 			double promedio_accuracy =total_accuracy/total;
-			double promedio_precision=total_precision/total;
+			double promedio_precision=total_precision/total;   // se saca el promeddio divido el total de experimentos 
 			double promedio_recall =total_recall/total;
 			double promedio_f1_score =total_f1score/total;
 			
-			promedio_accuracy = Math.round(promedio_accuracy*100.0)/100.0;
+			promedio_accuracy = Math.round(promedio_accuracy*100.0)/100.0;  // se redondean los double 
 			promedio_precision = Math.round(promedio_precision*100.0)/100.0;
 			promedio_recall = Math.round(promedio_recall*100.0)/100.0;
 			promedio_f1_score = Math.round(promedio_f1_score*100.0)/100.0;
@@ -470,23 +470,23 @@ public class App {
 
 	}	
 	public static void compararDosExperimentos(String exp1, String exp2) throws FileNotFoundException {
-		
+		// metodo que compara 2 experimentos elegidos por el usuario
 		String[] experimentos = {exp1, exp2};
 		File line2 = new File("predicciones.txt");    
 		
 		double[] accurrys = new double[2];
 		double[] precisions = new double[2];
-		double[] recalls = new double[2];
-		double[] f1_Scores = new double[2];
+		double[] recalls = new double[2]; // se crean listas de doubles, ahi se guardaran los resultados de los
+		double[] f1_Scores = new double[2];  // 2 experimentos a comparar 
 		
-		double[] tps = new double[2];
+		double[] tps = new double[2];   // aqui pasa lo  mismo
 		double[] fps = new double[2];
 		double[] tns = new double[2];
 		double[] fns = new double[2];
 
 		String experimentoMayorAccu = "";
 		String experimentoMayorPrec = "";
-		String experimentoMayorRecall = "";
+		String experimentoMayorRecall = "";  // se crean variables  para mayores 
 		String experimentoMayorF1 = "";
 		
 		int contadorExp1 = 0;
@@ -524,12 +524,12 @@ public class App {
 				}
 			}fila2.close();
 			
-			double Acurracy1= accuracy(tp, tn, fn, fp);
+			double Acurracy1= accuracy(tp, tn, fn, fp); // se llaman los metodos de las metricas 
 			double Precision1 = precision(tp, fp);
 			double Recall1 = recall(tp, fn);
 			double F1_score1 = f1_score(Precision1, Recall1);
 			
-			accurrys[i] = Math.round(Acurracy1*100.0)/100.0;
+			accurrys[i] = Math.round(Acurracy1*100.0)/100.0;  // se redondea 
 			precisions[i]= Math.round(Precision1*100.0)/100.0;
 			recalls[i]= Math.round(Recall1*100.0)/100.0;
 			f1_Scores[i]	= Math.round(F1_score1*100.0)/100.0;
@@ -581,16 +581,16 @@ public class App {
 		System.out.println("Recall:     "+ recalls[0] +" | "+ recalls[1]+" -- "+ experimentoMayorRecall +" tiene mejor recall ");
 		System.out.println("F1_score:   "+ f1_Scores[0] +" | "+ f1_Scores[1]+" -- "+ experimentoMayorF1 +" tiene un mejor balance ");
 		System.out.println(" ");
-		System.out.println("Predicciones  "+ exp1+ " | "+ exp2);
+		System.out.println("Predicciones  "+ exp1+ " | "+ exp2);  // se muestra todo por pantalla 
 		System.out.println("TP:           "+tps[0]+" | "+tps[1]);
 		System.out.println("FP:           "+fps[0]+"  | "+fps[1]);
-		System.out.println("TN:           "+tns[0]+" | "+tns[1]);
+		System.out.println("TN:           "+tns[0]+" | "+tns[1]);   
 		System.out.println("FN:           "+fns[0]+"  | "+fns[1]);
 		System.out.println(" ");
 		System.out.println("------------------");
-		
-		if (contadorExp1 ==3) {
-			System.out.println("El "+exp1+" es buen modelo");
+		  
+		if (contadorExp1 ==3) {     // en estas condicionales se va comparando que experimento es mejor 
+			System.out.println("El "+exp1+" es buen modelo");   
 			
 		}else if (contadorExp2 == 3) {
 			System.out.println("El "+exp2+" es buen modelo");
@@ -605,22 +605,22 @@ public class App {
 		
 		
 	}
-	public static void compararCSV() throws FileNotFoundException {  // pal puntaje extra aña
-		
-		double[] tps = new double[4];
-		double[] fps = new double[4];
-		double[] tns = new double[4];
-		double[] fns = new double[4];
-		
+	public static void mostrarComparacion() throws FileNotFoundException 
+	{  // pal puntaje extraaa
+		int[] tps = new int[4];
+		int[] fps = new int[4];
+		int[] tns = new int[4];
+		int[] fns = new int[4];
 		String[] experimentos = {"Exp1", "Exp2", "Exp3", "Exp4"};
 		File line2 = new File("predicciones.txt");          
 
-		for (int i = 0; i < experimentos.length; i++) {
+		for (int i = 0; i < experimentos.length; i++) 
+		{
 			
-			double tp = 0;
-			double fp=0;   // contadores
-			double tn  = 0;
-			double fn = 0;
+			int tp = 0;
+			int fp=0;   // contadores
+			int tn  = 0;
+			int fn = 0;
 			
 			Scanner fila2 = new Scanner(line2); 
 			String experimento_actual = experimentos[i];
@@ -634,7 +634,7 @@ public class App {
 				int predicho  = Integer.parseInt(partes[2]);
 
 				if (experimento.equalsIgnoreCase(experimento_actual)) 
-					
+				{
 					if(real == 1 && predicho == 1) { // cada vez que se encuentre cierta condicion, se le sumara 1 a los contadores 			
 						tp++;								
 					}else if (real == 0 && predicho == 1) {
@@ -645,15 +645,23 @@ public class App {
 						fn++;
 					}
 				}
-			}
-//		fila2.close();
-//			
-//			tps[i] = tp; // falta hacer contadores y matriz 
-//			fps[i]  = fp;
+			}fila2.close();
 			
+			tps[i] = tp; // falta hacer contadores y matriz 
+			fps[i]  = fp;
+			tns[i] = tn;
+			fns[i] = fn;	
 		}
-	
-	
+		System.out.println("        TP    FP    TN    FN  ");
+		for (int i = 0; i <experimentos.length; i++) {
+			System.out.println(experimentos[i] 
+					+"    "+ tps[i]
+					+"     "+fps[i]
+					+"     " +tns[i]
+					+"    "+fns[i]+"   ");
+		}
+		
+	}
 	public static double accuracy(double tp, double tn, double fp, double fn){  //Se crean metodos para cada metrica	
 		return (tp+ tn) / (tp + fp + tn + fn);								
 	}
